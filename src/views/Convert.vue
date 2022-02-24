@@ -7,7 +7,7 @@
 					<DropDown :arr="arr" :default="2" @selectChange="e => selectChange('from', e)" />
 				</div>
 				<div>Enter your number:</div>
-				<textarea @click="convertNum" v-model="number" placeholder="Type the number that you want to convert"></textarea>
+				<textarea @keypress="keypressConvert" v-model="number" placeholder="Type the number that you want to convert"></textarea>
 				<div class="conv_to">
 					Convert To:
 					<DropDown :arr="arr" :default="0" @selectChange="e => selectChange('to', e)" />
