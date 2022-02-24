@@ -7,7 +7,7 @@
 					<DropDown :arr="arr" :default="2" @selectChange="e => selectChange('from', e)" />
 				</div>
 				<div>Enter your number:</div>
-				<textarea v-model="number" placeholder="Type the number that you want to convert"></textarea>
+				<textarea @click="convertNum" v-model="number" placeholder="Type the number that you want to convert"></textarea>
 				<div class="conv_to">
 					Convert To:
 					<DropDown :arr="arr" :default="0" @selectChange="e => selectChange('to', e)" />
@@ -38,14 +38,20 @@
 				if (type == 'from') this.convFrom = val == 3 ? 'hex' : this.arr[val].toLowerCase()
 				if (type == 'to') this.convTo = val == 3 ? 'hex' : this.arr[val].toLowerCase()
 			},
-			convertNum() {
+			convertNum(e) {
 				this.result = undefined
-				if (!this.number || this.number == '') return false
+				if (!this.number || this.number == '') return this.$emit('errText', 'No number provided')
 				let result = convert({ from: this.convFrom, to: this.convTo, num: this.number })
 				if (result.error) {
 					this.$emit('errText', 'Invalid Number')
 					this.result = `Invalid Number. Please provide a valid ${this.convFrom == 'hex' ? 'Hexadecimal' : this.convFrom.slice(0, 1).toUpperCase() + this.convFrom.slice(1, this.convFrom.length)} number.`
 				} else this.result = result
+			},
+			keypressConvert(e) {
+				if (e.keyCode == 13) {
+					e.preventDefault()
+					this.convertNum()
+				}
 			}
 		}
 	}
