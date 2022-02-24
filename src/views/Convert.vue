@@ -45,7 +45,7 @@
 				if (result.error) {
 					this.$emit('errText', 'Invalid Number')
 					this.result = `Invalid Number. Please provide a valid ${this.convFrom == 'hex' ? 'Hexadecimal' : this.convFrom.slice(0, 1).toUpperCase() + this.convFrom.slice(1, this.convFrom.length)} number.`
-				} else this.result = result
+				} else this.result = result.toUpperCase()
 			},
 			keypressConvert(e) {
 				if (e.keyCode == 13) {
