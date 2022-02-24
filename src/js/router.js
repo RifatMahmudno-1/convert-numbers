@@ -3,17 +3,17 @@ const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
-			path: '/',
+			path: '/:pathMatch(.*)*',
 			meta: {
-				title: 'Home',
-				description: 'Home page of this Site'
+				title: 'Convert Numbers',
+				description: 'Convert Numbers'
 			},
-			component: () => import('@/views/Home.vue')
+			component: () => import('@/views/Convert.vue')
 		}
 	]
 })
 router.beforeEach((to, from, next) => {
-	document.title = to.meta.title || 'websiteName'
+	document.title = to.meta.title || 'Numbers'
 	next()
 })
 export default router

@@ -55,13 +55,16 @@ const functions = {
 			} else resInt = 0 + resInt
 			if (newNum) convInt(newNum)
 		}
+
 		function convDeci(num) {
 			let multi = num * devMulti
 			let spl = multi.toString().split('.')
 			if (parseInt(spl[0]) > 9) resDecimal += String.fromCharCode(parseInt(spl[0]) + 96 - 9)
 			else resDecimal += spl[0]
-			if (resDecimal.length < 20) {
-				if (spl[1]) convDeci(parseFloat('0.' + spl[1]))
+			if (resDecimal.length < 30 && spl[1]) {
+				convDeci(parseFloat('0.' + spl[1]))
+			} else if (resDecimal.length >= 30 && spl[1] && spl[0] == '0') {
+				convDeci(parseFloat('0.' + spl[1]))
 			}
 		}
 		return [int ? resInt : '0', decimal ? resDecimal : ''].join('')
